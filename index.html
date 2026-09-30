@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checklist Berangkat Kerja</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f1ed;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #6b4f45;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+        }
+
+        .tanggal {
+            text-align: center;
+            background-color: white;
+            padding: 12px;
+            border-radius: 12px;
+            margin: 15px 0;
+            color: #6b4f45;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px #00000015;
+        }
+
+        .progress {
+            text-align: center;
+            font-size: 20px;
+            color: #6b4f45;
+            margin-bottom: 15px;
+        }
+
+        .item {
+            display: block;
+            background-color: #f5f5f5;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .item input {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background-color: #9db5a8;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🌷 Checklist Berangkat Kerja</h1>
+
+    <p class="subtitle">
+        Semangat menjalani hari ♡
+    </p>
+
+    <div class="tanggal">
+        📅 <span id="tanggal"></span>
+        <br>
+        🕐 <span id="jam"></span>
+    </div>
+
+    <div class="card">
+
+        <div class="progress">
+            Progress: <span id="persen">0%</span>
+        </div>
+
+        <label class="item">
+            <input type="checkbox" onchange="hitung()">
+            Bangun tidur
+        </label>
+
+        <label class="item">
+            <input type="checkbox" onchange="hitung()">
+            Mandi
+        </label>
+
+        <label class="item">
+            <input type="checkbox" onchange="hitung()">
+            Sarapan
+        </label>
+
+        <label class="item">
+            <input type="checkbox" onchange="hitung()">
+            Pakai seragam
+        </label>
+
+        <label class="item">
+            <input type="checkbox" onchange="hitung()">
+            Bawa ID Card
+        </label>
+
+        <label class="item">
+            <input type="checkbox" onchange="hitung()">
+            Bawa dompet
+        </label>
+
+        <label class="item">
+            <input type="checkbox" onchange="hitung()">
+            Bawa HP
+        </label>
+
+        <label class="item">
+            <input type="checkbox" onchange="hitung()">
+            Bawa charger
+        </label>
+
+        <label class="item">
+            <input type="checkbox" onchange="hitung()">
+            Bawa kunci
+        </label>
+
+        <label class="item">
+            <input type="checkbox" onchange="hitung()">
+            Berangkat kerja 🚗
+        </label>
+
+        <br>
+
+        <button onclick="resetChecklist()">
+            🔄 Reset Checklist
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function hitung() {
+
+    let checkbox = document.querySelectorAll(
+        'input[type="checkbox"]'
+    );
+
+    let selesai = 0;
+
+    checkbox.forEach(function(item) {
+
+        if (item.checked) {
+            selesai++;
+        }
+
+    });
+let persen = (selesai / checkbox.length) * 100;
+
+    document.getElementById("persen").innerText =
+        persen + "%";
+}
+
+
+function resetChecklist() {
+
+    let checkbox = document.querySelectorAll(
+        'input[type="checkbox"]'
+    );
+
+    checkbox.forEach(function(item) {
+        item.checked = false;
+    });
+
+    document.getElementById("persen").innerText = "0%";
+}
+
+
+function waktuSekarang() {
+
+    let sekarang = new Date();
+
+    let tanggal = sekarang.toLocaleDateString(
+        "id-ID",
+        {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }
+    );
+
+    let jam = sekarang.toLocaleTimeString("id-ID");
+
+    document.getElementById("tanggal").innerText =
+        tanggal;
+
+    document.getElementById("jam").innerText =
+        jam;
+}
+
+waktuSekarang();
+
+setInterval(waktuSekarang, 1000);
+
+</script>
+
+</body>
+</html>
